@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vivobook-15 | Storage Dashboard</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#0a1020;color:#edf2ff}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top right,#233459,transparent 36%),#0a1020}.wrap{max-width:1080px;margin:auto;padding:26px 16px 65px}header{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;align-items:center}h1{font-size:clamp(26px,4vw,40px);margin:6px 0}h2{font-size:19px;margin:0 0 14px}.eyebrow{font-size:12px;color:#91a7ff;letter-spacing:2px;font-weight:800}.muted{color:#a8b7d2}.small{font-size:12px;color:#b5c3dc;line-height:1.6}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0}.card{background:#151f35;border:1px solid #2e3b59;border-radius:18px;padding:20px;box-shadow:0 10px 28px #0002}.metric{font-size:clamp(25px,3vw,36px);font-weight:800;margin:9px 0}.good{color:#53d5a1}.warn{color:#ffc56d}.bad{color:#ff8794}.main{display:grid;grid-template-columns:1.35fr 1fr;gap:14px}.cat{padding:15px 0;border-bottom:1px solid #303d57}.cat:last-child{border:0}.cat-top{display:flex;justify-content:space-between;gap:10px;align-items:center}.cat-title{font-weight:750}.status{font-size:12px;font-weight:750}.controls{display:flex;align-items:center;gap:12px;margin-top:10px}.controls input[type=range]{flex:1;min-width:50px;accent-color:#839bff}.num{background:#0c1426;border:1px solid #4b5e81;color:#fff;border-radius:10px;padding:10px;font-size:16px;width:92px;max-width:100%}.num:focus{outline:2px solid #8da3ff}.meter{height:7px;background:#29374f;border-radius:9px;overflow:hidden;margin-top:12px}.fill{height:100%;width:0;background:var(--c);transition:width .1s}.bar{display:flex;height:18px;overflow:hidden;background:#29374f;border-radius:15px;margin:17px 0}.seg{height:100%;width:0;transition:width .1s}.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:12px}.dot{width:9px;height:9px;display:inline-block;border-radius:3px;margin-right:5px}.field{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:16px 0}.field label{line-height:1.5}.note{border-left:3px solid #8da3ff;background:#101a30;border-radius:8px;padding:13px;line-height:1.6;font-size:13px}.buttons{display:flex;gap:8px;flex-wrap:wrap}button{background:#273b60;border:1px solid #536788;border-radius:10px;color:#fff;padding:10px 13px;font-weight:650;cursor:pointer}button:hover{background:#354c76}.section{margin-top:14px}.pill{font-size:12px;background:#243658;border:1px solid #3a4e73;border-radius:100px;padding:7px 11px}.sr{position:absolute;left:-9999px}@media(max-width:760px){.grid,.main{grid-template-columns:1fr}.wrap{padding:18px 12px 45px}.card{padding:18px}}
+</style></head><body><div class="wrap">
+<header><div><div class="eyebrow">VIVOBOOK-15 / STORAGE MANAGEMENT</div><h1>Storage Command Center</h1><div class="muted">Manual folder measurements + actual Windows SSD usage</div></div><div class="buttons"><button id="export" type="button">Export JSON</button><button id="importBtn" type="button">Import JSON</button><input class="sr" id="importFile" type="file" accept=".json,application/json"><button id="reset" type="button">Clear measurements</button></div></header>
+<div class="grid">
+<div class="card"><div class="muted">Internal SSD capacity</div><div class="metric"><span id="capacityDisplay">Not entered</span></div><div class="small"><label for="capacity">Usable C: capacity (GB)</label> <input class="num" id="capacity" type="number" min="1" step="0.1" placeholder="Check Windows"></div></div>
+<div class="card"><div class="muted">Free space from Windows total</div><div id="free" class="metric">—</div><div id="freeNote" class="small">Reserve: 150 GB (target)</div></div>
+<div class="card"><div class="muted">Actual SSD used (entered)</div><div id="used" class="metric">—</div><div id="usedPct" class="small">Waiting for measurements</div></div>
+</div>
+<div class="main"><div class="card"><h2>Allocation tracker</h2><p class="small">Enter folder sizes below, then enter the actual used space shown in Windows. The dashboard calculates everything else. Starting values are examples.</p>
+<div class="cat" data-key="games" data-limit="300" data-color="#6e91ff" style="--c:#6e91ff"><div class="cat-top"><div><span class="dot" style="background:#6e91ff"></span><span class="cat-title">Games</span><div class="small">Target 250–300 GB · max 300 GB</div></div><span class="status good">Not entered</span></div><div class="controls"><input type="range" min="0" max="350" value="" aria-label="Games slider"><input class="num" type="number" min="0" max="954" step="1" value="" aria-label="Games GB"><span class="small">GB</span></div><div class="meter"><div class="fill" style="width:0"></div></div></div>
+<div class="cat" data-key="ai" data-limit="90" data-color="#43d1b9" style="--c:#43d1b9"><div class="cat-top"><div><span class="dot" style="background:#43d1b9"></span><span class="cat-title">KoboldCPP + GGUF models</span><div class="small">Text generation only · max 90 GB</div></div><span class="status good">Not entered</span></div><div class="controls"><input type="range" min="0" max="150" value="" aria-label="GGUF slider"><input class="num" type="number" min="0" max="954" step="1" value="" aria-label="GGUF GB"><span class="small">GB</span></div><div class="meter"><div class="fill" style="width:0"></div></div></div>
+<div class="cat" data-key="reaper" data-limit="150" data-color="#ba91ff" style="--c:#ba91ff"><div class="cat-top"><div><span class="dot" style="background:#ba91ff"></span><span class="cat-title">REAPER samples + plugins</span><div class="small">Portable DAW library · max 150 GB</div></div><span class="status good">Not entered</span></div><div class="controls"><input type="range" min="0" max="220" value="" aria-label="REAPER slider"><input class="num" type="number" min="0" max="954" step="1" value="" aria-label="REAPER GB"><span class="small">GB</span></div><div class="meter"><div class="fill" style="width:0"></div></div></div>
+<div class="cat" data-key="vm" data-limit="30" data-color="#ffbf70" style="--c:#ffbf70"><div class="cat-top"><div><span class="dot" style="background:#ffbf70"></span><span class="cat-title">VMware — Windows 98 + XP</span><div class="small">Combined target 20–30 GB · max 30 GB</div></div><span class="status good">Not entered</span></div><div class="controls"><input type="range" min="0" max="70" value="" aria-label="VMware slider"><input class="num" type="number" min="0" max="954" step="1" value="" aria-label="VMware GB"><span class="small">GB</span></div><div class="meter"><div class="fill" style="width:0"></div></div></div>
+</div>
+<div><div class="card"><h2>SSD overview</h2><div class="bar" id="stack" aria-label="Storage usage breakdown"><div class="seg" data-part="games" style="width:0;background:#6e91ff"></div><div class="seg" data-part="ai" style="width:0;background:#43d1b9"></div><div class="seg" data-part="reaper" style="width:0;background:#ba91ff"></div><div class="seg" data-part="vm" style="width:0;background:#ffbf70"></div><div class="seg" data-part="other" style="width:0;background:#8a9bb6"></div><div class="seg" data-part="free" style="width:0;background:#53d5a1"></div></div>
+<div class="legend"><span><i class="dot" style="background:#6e91ff"></i>Games</span><span><i class="dot" style="background:#43d1b9"></i>GGUF</span><span><i class="dot" style="background:#ba91ff"></i>REAPER</span><span><i class="dot" style="background:#ffbf70"></i>VMs</span><span><i class="dot" style="background:#8a9bb6"></i>Other</span><span><i class="dot" style="background:#53d5a1"></i>Free</span></div>
+<div class="section"><div class="field"><label for="actual">Actual SSD used — Windows C: drive</label><input class="num" id="actual" type="number" min="0" max="954" value=""></div>
+<div class="field"><label for="other">Other — automatically calculated</label><output id="other" class="metric" style="font-size:21px">—</output></div><div class="field"><label for="reserve">Minimum free-space reserve</label><input class="num" id="reserve" type="number" min="0" max="954" value="150"></div></div>
+<p id="message" class="note" role="status">Enter your usable SSD capacity and actual used space after Windows onboarding. Category sizes can be added later.</p></div>
+<div class="card section"><h2>Storage locations</h2><p class="small"><b>Internal SSD:</b> Games, GGUF models, REAPER libraries, VMware, Windows and apps.</p><p class="small"><b>SanDisk Ultra Fit 1 TB:</b> Music and emulation ROMs. This drive is excluded from the internal SSD calculation.</p></div>
+</div></div>
+<div class="card section"><h2>How to use</h2><p class="muted" style="line-height:1.7">1. In Windows, open This PC → Local Disk (C:) → Properties and note the capacity and used space. 2. Check Properties for your Games, GGUF, REAPER libraries and VMware folders, adding together any folders belonging to the same category. 3. Enter the four category totals and your actual C: used space. 4. The dashboard automatically calculates Other = actual used − those four categories, and Free = capacity − actual used.</p><p class="note"><b>Important:</b> This dashboard does not scan your SSD. Enter measurements in GB using consistent units. The dashboard does not scan your drive. Values are saved in this browser when storage access is available. Use Export JSON to back up or transfer your entries to another browser or device.</p><p class="small" id="runtime">All measurements begin blank. Automatic calculation requires JavaScript.</p></div>
+<div class="small section">Storage limits are organizational budgets, not disk partitions. Capacity and usage estimates may differ from values shown by Windows.</div>
+</div>
+<script>
+(function(){
+"use strict";
+var KEY="vivobook-storage-clean-v1", names=["games","ai","reaper","vm"], limits={games:300,ai:90,reaper:150,vm:30};
+var state={capacity:null,actual:null,games:null,ai:null,reaper:null,vm:null,reserve:150};
+var rows={};
+function id(x){return document.getElementById(x);}
+function numeric(value){if(value===""||value===null||value===undefined)return null;var n=Number(value);return Number.isFinite(n)&&n>=0?n:null;}
+function fmt(n){return Number.isInteger(n)?String(n):n.toFixed(1);}
+function text(x,v){id(x).textContent=v;}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
+function render(){
+ var capacity=state.capacity,actual=state.actual,hasBase=capacity!==null&&actual!==null;
+ text("capacityDisplay",capacity===null?"Not entered":fmt(capacity)+" GB");
+ text("used",actual===null?"—":fmt(actual)+" GB");
+ text("free",hasBase?fmt(capacity-actual)+" GB":"—");
+ text("usedPct",hasBase?(100*actual/capacity).toFixed(1)+"% of capacity":"Waiting for measurements");
+ text("freeNote","Reserve: "+fmt(state.reserve)+" GB (target)");
+ id("free").className="metric "+(hasBase?(capacity-actual<state.reserve?"bad":"good"):"");
+ var total=0,complete=true,over=[];
+ names.forEach(function(k){
+  var r=rows[k],v=state[k];
+  r.number.value=v===null?"":v;
+  r.slider.value=v===null?0:Math.min(v,Number(r.slider.max));
+  r.fill.style.width=v===null?"0%":Math.min(100,v/limits[k]*100)+"%";
+  r.status.textContent=v===null?"Not entered":v>limits[k]?"Over limit":"Within limit";
+  r.status.className="status "+(v===null?"":v>limits[k]?"bad":"good");
+  if(v===null)complete=false;else{total+=v;if(v>limits[k])over.push(k);}
+  var seg=document.querySelector('[data-part="'+k+'"]');
+  if(seg)seg.style.width=hasBase&&v!==null?Math.min(100,v/capacity*100)+"%":"0%";
+ });
+ var other=hasBase&&complete?actual-total:null;
+ text("other",other===null?"—":fmt(other)+" GB");
+ var segOther=document.querySelector('[data-part="other"]'),segFree=document.querySelector('[data-part="free"]');
+ segOther.style.width=other!==null&&other>=0?Math.min(100,other/capacity*100)+"%":"0%";
+ segFree.style.width=hasBase?Math.max(0,Math.min(100,(capacity-actual)/capacity*100))+"%":"0%";
+ var msg=!hasBase?"Enter usable SSD capacity and actual used space from Windows to calculate free space.":capacity-actual<state.reserve?"Warning: Free space is below your "+fmt(state.reserve)+" GB reserve.":"Free space is above your reserve.";
+ if(actual!==null&&capacity!==null&&actual>capacity)msg+=" Actual used cannot exceed capacity; check your measurements.";
+ if(other!==null&&other<0)msg+=" Folder totals exceed actual used space: check for double-counting.";
+ if(over.length)msg+=" Over limit: "+over.join(", ")+".";
+ if(!complete)msg+=" Enter remaining category sizes to calculate Other.";
+ text("message",msg);
+}
+function sync(){["capacity","actual","reserve"].forEach(function(k){id(k).value=state[k]===null?"":state[k];});render();}
+function update(k,value){state[k]=numeric(value);if(k==="reserve"&&state[k]===null)state[k]=150;save();render();}
+function init(){
+ names.forEach(function(k){
+  var row=document.querySelector('.cat[data-key="'+k+'"]');
+  var slider=row.querySelector('input[type="range"]'),number=row.querySelector('input[type="number"]');
+  rows[k]={slider:slider,number:number,fill:row.querySelector(".fill"),status:row.querySelector(".status")};
+  slider.addEventListener("input",function(){state[k]=numeric(slider.value);number.value=slider.value;save();render();});
+  number.addEventListener("change",function(){update(k,number.value);});
+ });
+ ["capacity","actual","reserve"].forEach(function(k){id(k).addEventListener("change",function(){update(k,this.value);});});
+ try{var saved=JSON.parse(localStorage.getItem(KEY));if(saved&&typeof saved==="object")Object.keys(state).forEach(function(k){if(Object.prototype.hasOwnProperty.call(saved,k))state[k]=numeric(saved[k]);});}catch(e){}
+ if(state.reserve===null)state.reserve=150;
+ id("reset").addEventListener("click",function(){if(confirm("Clear all measurements?")){Object.keys(state).forEach(function(k){state[k]=k==="reserve"?150:null;});save();sync();}});
+ id("export").addEventListener("click",function(){
+  var blob=new Blob([JSON.stringify({device:"Vivobook-15",values:state},null,2)],{type:"application/json"});
+  var url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="vivobook-storage-backup.json";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},1500);
+ });
+ id("importBtn").addEventListener("click",function(){id("importFile").click();});
+ id("importFile").addEventListener("change",function(){var f=this.files&&this.files[0];if(!f)return;var reader=new FileReader();reader.onload=function(){try{var data=JSON.parse(reader.result);data=data.values||data;Object.keys(state).forEach(function(k){if(Object.prototype.hasOwnProperty.call(data,k))state[k]=numeric(data[k]);});if(state.reserve===null)state.reserve=150;save();sync();}catch(e){alert("Invalid JSON backup.");}};reader.readAsText(f);this.value="";});
+ text("runtime","Calculations active. All measurement fields start blank; values are saved locally when browser storage permits.");
+ sync();
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
+})();
+</script></body></html>
