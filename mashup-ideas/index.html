@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Mashup Ideas</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --background: #0b0b10;
+      --surface: #121219;
+      --surface-hover: #181821;
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #f4f4f7;
+      --muted: #92929f;
+      --accent: #a970ff;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+
+      background:
+        radial-gradient(circle at 15% 0%, rgba(169, 112, 255, 0.10), transparent 32rem),
+        var(--background);
+
+      color: var(--text);
+
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+    }
+
+    .page {
+      width: min(900px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 70px 0 90px;
+    }
+
+    header {
+      margin-bottom: 36px;
+    }
+
+    .eyebrow {
+      margin-bottom: 10px;
+
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+
+      font-size: clamp(2.5rem, 7vw, 4.5rem);
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+
+    .subtitle {
+      margin: 16px 0 0;
+
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .count {
+      display: inline-block;
+
+      margin-top: 20px;
+      padding: 6px 11px;
+
+      border: 1px solid var(--border);
+      border-radius: 20px;
+
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .ideas {
+      overflow: hidden;
+
+      border: 1px solid var(--border);
+      border-radius: 16px;
+
+      background: rgba(18, 18, 25, 0.75);
+    }
+
+    .idea {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 16px;
+      align-items: center;
+
+      padding: 18px 22px;
+
+      border-bottom: 1px solid var(--border);
+
+      transition: background 150ms ease;
+    }
+
+    .idea:last-child {
+      border-bottom: none;
+    }
+
+    .idea:hover {
+      background: var(--surface-hover);
+    }
+
+    .number {
+      color: #5f5f6b;
+      font-size: 0.76rem;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .artists {
+      margin-bottom: 3px;
+
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .title {
+      margin: 0;
+
+      color: var(--text);
+      font-size: 1.08rem;
+      font-weight: 650;
+      letter-spacing: -0.01em;
+    }
+
+    footer {
+      margin-top: 26px;
+
+      color: #5f5f69;
+      font-size: 0.75rem;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        width: calc(100% - 20px);
+        padding-top: 42px;
+      }
+
+      header {
+        padding: 0 8px;
+      }
+
+      .idea {
+        grid-template-columns: 30px 1fr;
+        gap: 11px;
+        padding: 16px 14px;
+      }
+
+      .artists {
+        font-size: 0.74rem;
+      }
+
+      .title {
+        font-size: 0.98rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="page">
+
+    <header>
+      <div class="eyebrow">DJ Projects</div>
+
+      <h1>Mashup Ideas</h1>
+
+      <p class="subtitle">
+        Concepts and combinations to create later.
+      </p>
+
+      <div class="count">19 ideas</div>
+    </header>
+
+
+    <section class="ideas">
+
+      <article class="idea">
+        <div class="number">01</div>
+        <div>
+          <div class="artists">Shingo Nakamura feat. Masanori Yasuda &amp; Lisa Miskovsky</div>
+          <h2 class="title">Abyss (Still Alive)</h2>
+        </div>
+      </article>
+
+      <article class="idea">
+        <div class="number">02</div>
+        <div>
+          <div class="artists">London Elektricity &amp; Lil Rob</div>
+          <h2 class="title">Summer Nights That Cannot Fail</h2>
+        </div>
+      </article>
+
+      <article class="idea">
+        <div class="number">03</div>
+        <div>
+          <div class="artists">The Weeknd &amp; 4Mal</div>
+          <h2 class="title">Earned It (Outside)</h2>
+        </div>
+      </article>
+
+      <article class="idea">
+        <div class="number">04</div>
+        <div>
+          <div class="artists">Megara vs. DJ Lee feat. Krewella</div>
+          <h2 class="title">Alive &amp; In Control</h2>
+        </div>
+      </article>
+
+      <article class="idea">
+        <div class="number">05</div>
+        <div>
+          <div class="artists">Anthony Pateras &amp; Mr. Bean</div>
+          <h2 class="title">At Least I Knew Who I Was F*cking (Laugh Tracks Addon)</h2>
+        </div>
+      </article>
+
+      <article class="idea">
+        <div class="number">06</div>
+        <div>
+          <div class="artists">Domestic Technology feat. Justin Bieber</div>
+          <h2 class="title">Sorry (Rise)</h2>
+        </div>
+      </article>
+
+      <article class="idea">
+        <div class="number">07</div>
+        <div>
+          <div class="artists">Enei feat. The Mad Stuntman</div>
+          <h2 class="title">I Like To Move It (Headtop)</h2>
+        </div>
+      </article>
+
+      <article class="idea">
+        <div class="number">08</div>
+        <div>
+          <div class="artists">Usher vs. DJ Nagureo</div>
+          <h2 class="title">U Got It Bad (Patsenner)</h2>
+        </div>
+      </article>
+
+      <article class="idea">
+        <div class="number">09</div>
+        <div>
+          <div class="artists">Stephen J Kroos feat. Violette Wautier</div>
+          <h2 class="title">Fahk Wai (Heimwee)</h2>
+        </div>
+      </article>
+
+      <article class="idea">
+        <div class="number">10</div>
+        <div>
+          <div class="artists">Boom Jinx feat. Iggy Azalea &amp; Charli XCX</div>
+          <h2 class="title">Jazzy Fancy Hip-Hop Nonsense</h2>
+        </div>
+      </article>
+
+      <article class="idea">
+        <div class="number">11</div>
+        <div>
+          <div class="artists">Glee Cast vs. Mike Shiver</div>
+          <h2 class="title">Morning Drive (Don’t Stop Believin’)</h2>
+        </div>
+      </article>
+
+      <article class="idea">
+        <div class="number">12</div>
+        <div>
+          <div class="artists">KOAN Sound feat. Ludacris &amp; Shawnna</div>
+          <h2 class="title">Stand Up (Sly Fox)</h2>
+        </div>
+      </article>
+
+      <article class="idea">
+        <div class="number">13</div>
+        <div>
+          <div class="artists">Jaytech &amp; Paowalee Pornpimol</div>
+          <h2 class="title">Solero (Rush In)</h2>
+        </div>
+      </article>
+
+      <article class="idea">
+        <div class="number">14</div>
+        <div>
+          <div class="artists">Urbandawn feat. Taylor Swift</div>
+          <h2 class="title">Shake It Off (Torus)</h2>
+        </div>
+      </article>
+
+      <article class="idea">
+        <div class="number">15</div>
+        <div>
+          <div class="artists">Aeron Aether &amp; Embliss feat. Ariana Grande</div>
+          <h2 class="title">Break Free (A New Dawn)</h2>
+        </div>
+      </article>
+
+      <article class="idea">
+        <div class="number">16</div>
+        <div>
+          <div class="artists">Ariana Grande vs. Activa &amp; Gate 42</div>
+          <h2 class="title">Into You (Transmission)</h2>
+        </div>
+      </article>
+
+      <article class="idea">
+        <div class="number">17</div>
+        <div>
+          <div class="artists">Jimmy Jam &amp; Terry Lewis feat. IU</div>
+          <h2 class="title">Human Celebrity</h2>
+        </div>
+      </article>
+
+      <article class="idea">
+        <div class="number">18</div>
+        <div>
+          <div class="artists">Danny Byrd feat. Pharrell</div>
+          <h2 class="title">Devil's Happy</h2>
+        </div>
+      </article>
+
+      <article class="idea">
+        <div class="number">19</div>
+        <div>
+          <div class="artists">Manuel Cazares feat. Zhang Li Yin</div>
+          <h2 class="title">Moving On</h2>
+        </div>
+      </article>
+
+    </section>
+
+    <footer>
+      Mashup idea archive
+    </footer>
+
+  </main>
+
+</body>
+</html>

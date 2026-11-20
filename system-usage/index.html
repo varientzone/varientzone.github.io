@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>System Usage & Device Setup</title>
+<style>
+:root{
+  --bg:#0a0f1d;
+  --panel:#121a2b;
+  --panel2:#0f1626;
+  --border:#273451;
+  --text:#eef3ff;
+  --muted:#9faecc;
+  --accent:#7f95ff;
+  --accent2:#48d2bb;
+  --warn:#ffbf69;
+  --good:#58d29e;
+  --pink:#d58cff;
+  --blue:#6aa6ff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter,Segoe UI,system-ui,-apple-system,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 85% 0%, #23345e 0, transparent 30%),
+    radial-gradient(circle at 0% 35%, #16334a 0, transparent 24%),
+    var(--bg);
+}
+a{color:#a9b8ff;text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1180px;margin:auto;padding:28px 18px 70px}
+.hero{
+  background:linear-gradient(135deg,#16213a,#11192b 62%,#17243a);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:28px;
+  box-shadow:0 18px 50px #0004;
+}
+.eyebrow{font-size:12px;letter-spacing:2px;color:#9db0ff;font-weight:800}
+h1{font-size:clamp(30px,5vw,48px);margin:8px 0 8px}
+.subtitle{color:var(--muted);font-size:15px;line-height:1.6}
+.nav{
+  display:flex;flex-wrap:wrap;gap:10px;margin-top:20px
+}
+.nav a{
+  background:#1a2742;border:1px solid #314363;color:#e8eeff;
+  padding:9px 12px;border-radius:999px;font-size:13px;font-weight:700
+}
+.section{margin-top:22px}
+.device{
+  background:rgba(18,26,43,.93);
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:24px;
+  box-shadow:0 12px 34px #0002;
+}
+.device-head{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:15px;flex-wrap:wrap
+}
+.device-title{margin:0;font-size:27px}
+.meta{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;margin-top:18px
+}
+.meta .box{
+  background:var(--panel2);border:1px solid #26334c;border-radius:14px;padding:14px
+}
+.label{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:#8fa2c4;font-weight:800}
+.value{font-size:15px;font-weight:700;margin-top:5px;line-height:1.4}
+.grid{
+  display:grid;grid-template-columns:1.15fr .85fr;gap:16px;margin-top:18px
+}
+.card{
+  background:var(--panel2);
+  border:1px solid #26334c;
+  border-radius:16px;
+  padding:18px;
+}
+.card h3{margin:0 0 14px;font-size:17px}
+.rows{display:grid;gap:10px}
+.row{
+  display:grid;grid-template-columns:170px 1fr;gap:12px;
+  border-bottom:1px solid #25314a;padding-bottom:10px
+}
+.row:last-child{border-bottom:0;padding-bottom:0}
+.key{font-weight:800;color:#c5d1eb}
+.val{color:#e8edfa;line-height:1.55}
+.storage-table, .assign-table, .budget-table{
+  width:100%;border-collapse:collapse;font-size:14px
+}
+.storage-table th,.storage-table td,
+.assign-table th,.assign-table td,
+.budget-table th,.budget-table td{
+  border-bottom:1px solid #28354d;
+  padding:11px 9px;text-align:left;vertical-align:top
+}
+.storage-table th,.assign-table th,.budget-table th{
+  color:#a9b8d7;font-size:12px;text-transform:uppercase;letter-spacing:.8px
+}
+.storage-table tr:last-child td,.assign-table tr:last-child td,.budget-table tr:last-child td{border-bottom:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  background:#1b2943;border:1px solid #324567;border-radius:999px;
+  padding:7px 10px;font-size:12px;color:#edf2ff
+}
+.note{
+  margin-top:14px;background:#111d32;border-left:3px solid var(--accent);
+  border-radius:10px;padding:13px 14px;color:#cbd7ee;line-height:1.6;font-size:13px
+}
+.good{color:var(--good);font-weight:800}
+.warn{color:var(--warn);font-weight:800}
+.accent{color:#a9b8ff;font-weight:800}
+.budget{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px
+}
+.budget-card{
+  background:#121e33;border:1px solid #2a3a57;border-radius:14px;padding:14px
+}
+.budget-card b{display:block;font-size:22px;margin-top:5px}
+.footer-card{
+  margin-top:22px;background:#11192a;border:1px solid var(--border);
+  border-radius:18px;padding:20px
+}
+.small{font-size:12px;color:var(--muted);line-height:1.6}
+code{
+  font-family:Consolas,monospace;background:#0b1322;border:1px solid #23314a;
+  padding:2px 6px;border-radius:6px;color:#d8e3ff
+}
+@media(max-width:820px){
+  .meta{grid-template-columns:1fr}
+  .grid{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr}
+  .budget{grid-template-columns:1fr 1fr}
+}
+@media(max-width:520px){
+  .wrap{padding:15px 10px 45px}
+  .hero,.device{padding:18px}
+  .budget{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<section class="hero">
+  <div class="eyebrow">MASTER SYSTEM TEMPLATE</div>
+  <h1>System Usage & Device Setup</h1>
+  <div class="subtitle">
+    A centralized reference for device roles, workloads, storage, peripherals, audio,
+    and allocation rules across the full setup.
+  </div>
+  <nav class="nav">
+    <a href="#trident">Trident-11</a>
+    <a href="#predator">Predator-16</a>
+    <a href="#vivobook">Vivobook-15</a>
+    <a href="#iphone">iPhone 17 Pro Max</a>
+    <a href="#accessories">Accessory Assignment</a>
+  </nav>
+</section>
+
+<section id="trident" class="section device">
+  <div class="device-head">
+    <div>
+      <div class="eyebrow">MAIN DESKTOP / WORKSTATION</div>
+      <h2 class="device-title">MSI Trident X 11th</h2>
+    </div>
+    <span class="chip">Computer Name: Trident-11</span>
+  </div>
+
+  <div class="meta">
+    <div class="box"><div class="label">Role</div><div class="value">Main Desktop / Workstation</div></div>
+    <div class="box"><div class="label">Focus</div><div class="value">Ultrawide Gaming • Game Development • Music Production • Video Editing</div></div>
+    <div class="box"><div class="label">AI Workloads</div><div class="value">None</div></div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Software & Workloads</h3>
+      <div class="rows">
+        <div class="row"><div class="key">Gaming</div><div class="val">Ultrawide PC Gaming</div></div>
+        <div class="row"><div class="key">Game Development</div><div class="val">Unreal Engine • Godot</div></div>
+        <div class="row"><div class="key">Music Production</div><div class="val">FL Studio • Ableton Live</div></div>
+        <div class="row"><div class="key">Video Editing</div><div class="val">DaVinci Resolve</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Peripherals & Audio</h3>
+      <div class="rows">
+        <div class="row"><div class="key">Controller</div><div class="val">8BitDo Ultimate 2C Wireless — 2.4 GHz</div></div>
+        <div class="row"><div class="key">Mouse</div><div class="val">Razer Viper Ultimate #1 — Wired</div></div>
+        <div class="row"><div class="key">Keyboard</div><div class="val">Logitech K580 — Wireless</div></div>
+        <div class="row"><div class="key">Interface</div><div class="val">Focusrite Scarlett 2i2</div></div>
+        <div class="row"><div class="key">Studio IEM</div><div class="val">Sennheiser IE 200</div></div>
+        <div class="row"><div class="key">Bluetooth Audio</div><div class="val">SteelSeries Arctis GameBuds</div></div>
+        <div class="row"><div class="key">Sound Design Mic</div><div class="val">Sabinetek SmartMike+</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3>Storage</h3>
+    <table class="storage-table">
+      <thead><tr><th>Storage</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><b>Internal SSD</b></td><td>FL Studio • Ableton Live</td></tr>
+        <tr><td><b>WD Elements</b></td><td>Local Music • Master Exports • Video Content • Pictures • Completed Game Projects</td></tr>
+        <tr><td><b>Crucial X10 Plus*</b></td><td>Games Library • Game Development • Virt-A-Mate</td></tr>
+        <tr><td><b>Crucial X10 Pro</b></td><td>Music Projects • Sample Libraries</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><b>*X10 Plus</b> is a personal identifier for the second physically identical Crucial X10 Pro.</div>
+    <div class="note"><b>Studio monitors planned:</b> Kali Audio LP-UNF. Future upgrade candidates: ADAM Audio T5V or Kali Audio IN-8 V2.</div>
+  </div>
+</section>
+
+<section id="predator" class="section device">
+  <div class="device-head">
+    <div>
+      <div class="eyebrow">HIGH-PERFORMANCE GAMING / SPECIALTY LAPTOP</div>
+      <h2 class="device-title">Acer Predator / Helios</h2>
+    </div>
+    <span class="chip">Computer Name: Predator-16</span>
+  </div>
+
+  <div class="meta">
+    <div class="box"><div class="label">Role</div><div class="value">High-Performance Gaming / Specialty Laptop</div></div>
+    <div class="box"><div class="label">Focus</div><div class="value">OLED Gaming • Android • VR • AI Image Generation • Virtual Machines</div></div>
+    <div class="box"><div class="label">AI Role</div><div class="value">Primary local image-generation system</div></div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Software & Workloads</h3>
+      <div class="rows">
+        <div class="row"><div class="key">Gaming</div><div class="val">OLED PC Gaming</div></div>
+        <div class="row"><div class="key">Android</div><div class="val">MuMuPlayer</div></div>
+        <div class="row"><div class="key">VR</div><div class="val">PC VR • Virt-A-Mate OpenVR<br><a href="https://hub.virtamate.com/resources/true-through-native-passthrough-meta-bridge.70484/" target="_blank" rel="noopener noreferrer"><b>True Through Native Passthrough (Meta Bridge)</b></a> — Quest 3 passthrough support</div></div>
+        <div class="row"><div class="key">AI — Image Generation</div><div class="val">SwarmUI • MOSS-Image • Classic Stable Diffusion 1.5 models</div></div>
+        <div class="row"><div class="key">SD 1.5 Role</div><div class="val">Classic / lightweight models for very fast generation</div></div>
+        <div class="row"><div class="key">Virtual Machines</div><div class="val">VMware — Windows 98 • XP • 8.1</div></div>
+        <div class="row"><div class="key">Emulation</div><div class="val"><b>Nintendo Switch:</b> <a href="https://git.eden-emu.dev/eden-emu/eden/releases" target="_blank" rel="noopener noreferrer">Eden</a> — primary Switch emulator (Windows PGO build preferred) • <b>PlayStation 4:</b> <a href="https://github.com/junminlee2004/GR2fork" target="_blank" rel="noopener noreferrer">GR2fork</a> — shadPS4 fork focused on Gravity Rush 2 / Gravity Rush Remastered with broader performance improvements; also suitable for testing Bloodborne</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Peripherals & Audio</h3>
+      <div class="rows">
+        <div class="row"><div class="key">Controller</div><div class="val">8BitDo Ultimate 2 Wireless — 2.4 GHz</div></div>
+        <div class="row"><div class="key">Mouse</div><div class="val">Razer Viper Ultimate #2 — Wired</div></div>
+        <div class="row"><div class="key">Keyboard</div><div class="val">NuPhy Air75 V3 — Wired</div></div>
+        <div class="row"><div class="key">Audio</div><div class="val">SteelSeries Arctis GameBuds</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3>Storage</h3>
+    <table class="storage-table">
+      <thead><tr><th>Storage</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><b>1 TB Internal SSD</b></td><td>Android • VMware • Switch Emulation • PS4 Emulation</td></tr>
+        <tr><td><b>2 TB Internal Plus SSD</b></td><td>Games & VR Library • Virt-A-Mate OpenVR • SwarmUI • MOSS-Image • Stable Diffusion 1.5 Models</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="vivobook" class="section device">
+  <div class="device-head">
+    <div>
+      <div class="eyebrow">LIGHTWEIGHT PORTABLE WORKSTATION</div>
+      <h2 class="device-title">ASUS Vivobook</h2>
+    </div>
+    <span class="chip">Computer Name: Vivobook-15</span>
+  </div>
+
+  <div class="meta">
+    <div class="box"><div class="label">Role</div><div class="value">Lightweight Portable Workstation</div></div>
+    <div class="box"><div class="label">Focus</div><div class="value">Lightweight OLED Gaming • Text AI • Legacy VMs • DJing • Music Production</div></div>
+    <div class="box"><div class="label">AI Role</div><div class="value">Local language-model text generation only</div></div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Software & Workloads</h3>
+      <div class="rows">
+        <div class="row"><div class="key">Gaming</div><div class="val">Lightweight OLED PC Gaming • Lossless Scaling / LSFG</div></div>
+        <div class="row"><div class="key">eGPU — Planned</div><div class="val"><a href="https://www.nimopc.com/products/nimo-gme1s-egpu-dock-with-radeon-rx-7600m-xt-thunderbolt-5-oculink" target="_blank" rel="noopener noreferrer"><b>NIMO GME1s</b></a> — Radeon RX 7600M XT 8 GB GDDR6, up to 120W TGP • USB-C 80 Gbps / OCuLink 64 Gbps • Vivobook uses Thunderbolt 4 host connection • built-in 240W PSU • up to 65W PD reverse charging</div></div>
+        <div class="row"><div class="key">eGPU Gaming Plan</div><div class="val">RX 7600M XT handles game rendering; Lossless Scaling / LSFG can target the 120 Hz OLED from a lower capped base frame rate. Dual-GPU LSFG with Intel Arc is an optional test configuration.</div></div>
+        <div class="row"><div class="key">AI — Text Generation</div><div class="val">KoboldCPP • Serene Pub • Narratrix • GGUF Models</div></div>
+        <div class="row"><div class="key">Virtual Machines</div><div class="val">VMware — Windows 98 • XP</div></div>
+        <div class="row"><div class="key">DJing — Primary</div><div class="val">Serato DJ — traditional DJ mixing with TIDAL streaming, organized playlists, and local music; streaming reduces local storage use</div></div>
+        <div class="row"><div class="key">DJing — Future / Watchlist</div><div class="val">Syndicate — experimental creative performance playground using local music; VST3 synths/instruments, effects, sequencing, and live mixing. Consider after a stable, polished release; streaming support may come later.</div></div>
+        <div class="row"><div class="key">Music Production</div><div class="val">REAPER</div></div>
+        <div class="row"><div class="key">Emulation</div><div class="val">RetroArch • PCSX2 • Dolphin</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Peripherals & Audio</h3>
+      <div class="rows">
+        <div class="row"><div class="key">Controller</div><div class="val">8BitDo Ultimate 2 Wireless — 2.4 GHz dongle shared with Predator</div></div>
+        <div class="row"><div class="key">Mouse — Planned</div><div class="val">Razer Orochi V2</div></div>
+        <div class="row"><div class="key">Mouse — Temporary</div><div class="val">KLO 2.4 GHz</div></div>
+        <div class="row"><div class="key">Keyboard</div><div class="val">Built-in</div></div>
+        <div class="row"><div class="key">USB Hub</div><div class="val">Plugable Rotating 4-Port USB Hub</div></div>
+        <div class="row"><div class="key">USB-C / TB4 #1</div><div class="val"><b>Shared / Swappable:</b> ASUS 90W USB-C charger <b>OR</b> NIMO GME1s eGPU Thunderbolt 4 host cable — only one connected at a time</div></div>
+        <div class="row"><div class="key">USB-C / TB4 #2</div><div class="val"><b>Dedicated:</b> iFi GO link 2 DAC → Shure SE215</div></div>
+        <div class="row"><div class="key">eGPU — Planned</div><div class="val">NIMO GME1s — RX 7600M XT • Thunderbolt 4 connection via USB-C / TB4 #1 when in eGPU mode</div></div>
+        <div class="row"><div class="key">Bluetooth Audio</div><div class="val">AirPods Pro 3 via MagicPods</div></div>
+        <div class="row"><div class="key">Microphone</div><div class="val">Built-in</div></div>
+        <div class="row"><div class="key">Dedicated IEM</div><div class="val">Shure SE215</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3>Storage</h3>
+    <table class="storage-table">
+      <thead><tr><th>Storage</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><b>1 TB Internal SSD</b></td><td>Games • VMware • Language Models • Serato • REAPER • Sample Libraries • Plugins • Syndicate (future, if adopted)</td></tr>
+        <tr><td><b>1 TB SanDisk Ultra Fit</b></td><td>Local Music • ROM Library</td></tr>
+      </tbody>
+    </table>
+
+    <div class="budget">
+      <div class="budget-card"><div class="label">Games</div><b>250–300 GB</b><div class="small">Target / maximum range</div></div>
+      <div class="budget-card"><div class="label">Language Models</div><b>90 GB</b><div class="small">KoboldCPP • Serene Pub • Narratrix • GGUF models</div></div>
+      <div class="budget-card"><div class="label">REAPER Samples + Plugins</div><b>150 GB</b><div class="small">Maximum</div></div>
+      <div class="budget-card"><div class="label">VMware 98 + XP</div><b>20–30 GB</b><div class="small">Combined target</div></div>
+    </div>
+
+    <div class="note">
+      <span class="good">Reserved free-space rule:</span> internal SSD should never fall below approximately <b>150 GB free</b>.
+      These are organizational caps, not physical partitions.
+    </div>
+    <div class="note">
+      <b>Language Models folder:</b> <code>C:\Language Models</code> contains four subfolders:
+      <code>KoboldCPP</code>, <code>Serene Pub</code>, <code>Narratrix</code>, and <code>Models</code>.
+      Narratrix uses the standalone upstream KoboldCPP build on <code>localhost:5001</code>.
+      Serene Pub uses its own managed KoboldCPP instance on <code>localhost:5002</code>.
+      Both frontends may use the shared GGUF collection in <code>Models</code>, but the Vivobook is intended to run one local model workload at a time.
+    </div>
+    <div class="note">
+      <b>DJ software plan:</b> <b>Serato DJ</b> is the traditional, mainstream DJ setup: mix both local files and tracks streamed from organized TIDAL playlists, keeping the local music footprint smaller. <a href="https://untitledaudiosyndicate.com/syndicate" target="_blank" rel="noopener noreferrer"><b>Syndicate</b></a> is a separate creative playground for local music, live arrangements, sequencing, effects, and especially experimenting with VST3 synthesizers while mixing. Wait for a stable, polished release before adopting it. Its current early-access license is $50 one-time; native TIDAL integration is not currently documented, though future support is possible.
+    </div>
+    <div class="note">
+      Image generation does <b>not</b> live on the Vivobook. All local image-generation workloads are assigned to <code>Predator-16</code>.
+    </div>
+  </div>
+</section>
+
+<section id="iphone" class="section device">
+  <div class="device-head">
+    <div>
+      <div class="eyebrow">MOBILE / HANDHELD / AR SYSTEM</div>
+      <h2 class="device-title">iPhone 17 Pro Max</h2>
+    </div>
+  </div>
+
+  <div class="meta">
+    <div class="box"><div class="label">Role</div><div class="value">Mobile / Handheld / AR System</div></div>
+    <div class="box"><div class="label">Focus</div><div class="value">Handheld Gaming • AR Gaming • Mobile Audio</div></div>
+    <div class="box"><div class="label">Shared Audio</div><div class="value">AirPods Pro 3</div></div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Handheld Mode</h3>
+      <div class="rows">
+        <div class="row"><div class="key">Controller</div><div class="val">GameSir X5 Lite for Xbox</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>AR / XR Mode</h3>
+      <div class="rows">
+        <div class="row"><div class="key">Glasses — Considering</div><div class="val">XREAL 1 Pro+ • VITURE Beast</div></div>
+        <div class="row"><div class="key">Controller</div><div class="val">8BitDo Ultimate 2 Wireless — Bluetooth</div></div>
+        <div class="row"><div class="key">Audio</div><div class="val">AirPods Pro 3</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="accessories" class="section device">
+  <div class="device-head">
+    <div>
+      <div class="eyebrow">SHARED HARDWARE MAP</div>
+      <h2 class="device-title">Accessory Assignment</h2>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <table class="assign-table">
+      <thead><tr><th>Accessory</th><th>Assignment</th></tr></thead>
+      <tbody>
+        <tr><td><b>8BitDo Ultimate 2C Wireless</b></td><td>Trident-11</td></tr>
+        <tr><td><b>8BitDo Ultimate 2 Wireless</b></td><td>Predator-16 / Vivobook-15 via 2.4 GHz • iPhone via Bluetooth</td></tr>
+        <tr><td><b>Razer Viper Ultimate #1</b></td><td>Trident-11</td></tr>
+        <tr><td><b>Razer Viper Ultimate #2</b></td><td>Predator-16</td></tr>
+        <tr><td><b>Razer Orochi V2</b></td><td>Vivobook-15 — Planned</td></tr>
+        <tr><td><b>Sennheiser IE 200</b></td><td>Trident-11</td></tr>
+        <tr><td><b>Shure SE215</b></td><td>Vivobook-15</td></tr>
+        <tr><td><b>SteelSeries Arctis GameBuds</b></td><td>Trident-11 / Predator-16</td></tr>
+        <tr><td><b>AirPods Pro 3</b></td><td>iPhone 17 Pro Max / Vivobook-15</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="footer-card">
+  <h3 style="margin-top:0">Storage Naming Note</h3>
+  <p class="subtitle">
+    Two physically identical <b>Crucial X10 Pro</b> external SSDs are used with <code>Trident-11</code>.
+  </p>
+  <div class="chips">
+    <span class="chip"><b>X10 Plus</b>&nbsp;— Games • Game Development • Virt-A-Mate</span>
+    <span class="chip"><b>X10 Pro</b>&nbsp;— Music Projects • Sample Libraries</span>
+  </div>
+  <p class="small" style="margin-top:14px">
+    “X10 Plus” is a personal identifier used to distinguish the two drives and is not a separate Crucial product model.
+  </p>
+</section>
+
+</div>
+</body>
+</html>
