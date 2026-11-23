@@ -53,13 +53,13 @@ tr:hover td{background:#1a2030}
 <div class="field"><label for="category">Category</label><select id="category"><option value="">All categories</option></select></div>
 <div class="field"><label for="subcategory">Function / Subcategory</label><select id="subcategory"><option value="">All functions</option></select></div>
 <div class="field"><label for="batch">Original batch</label><select id="batch"><option value="">All batches</option><option value="1">Batch 1</option><option value="2">Batch 2</option><option value="3">Batch 3</option><option value="4">Batch 4</option></select></div>
-<div class="field"><label for="sort">Sort by</label><select id="sort"><option value="original">Original order</option><option value="name">Plugin name A–Z</option><option value="developer">Developer A–Z</option><option value="listed-low">Listed price: low to high</option><option value="listed-high">Listed price: high to low</option><option value="target">Target price first</option><option value="priority-low">Priority: low to high</option><option value="priority-high">Priority: high to low</option></select></div>
+<div class="field"><label for="sort">Sort by</label><select id="sort"><option value="recent">Recently added (newest first)</option><option value="original">Original order</option><option value="name">Plugin name A–Z</option><option value="developer">Developer A–Z</option><option value="listed-low">Listed price: low to high</option><option value="listed-high">Listed price: high to low</option><option value="target">Target price first</option><option value="priority-low">Priority: low to high</option><option value="priority-high">Priority: high to low</option></select></div>
 </section>
 <div class="actions"><div class="count" id="result-count" aria-live="polite">Loading wishlist…</div><button type="button" id="reset">Reset filters</button></div>
 <div id="error" class="warning" hidden></div>
 <div class="table-wrap"><table><thead><tr><th>Plugin / bundle</th><th>Developer</th><th>Category / function</th><th>Listed price</th><th>Target price</th><th>Priority</th><th>Purchase</th></tr></thead><tbody id="rows"><tr><td colspan="7" class="empty">Loading plugins-tracker.json…</td></tr></tbody></table></div>
 <div id="mobile-cards" class="mobile-cards" aria-label="Plugin cards"></div>
-<p class="foot">Prices are historical/user-supplied wishlist figures, not live store quotes. A dash means no value has been recorded. A purchase link appears only when verified and entered in <code>plugins-tracker.json</code>. Bundle components are not counted as separate purchases. Edit the JSON file to update your list.</p>
+<p class="foot">Prices are historical/user-supplied wishlist figures, not live store quotes. A dash means no value has been recorded. A purchase link appears only when verified and entered in <code>plugins-tracker.json</code>. Bundle components are not counted as separate purchases. Edit the JSON file to update your list. New entries can include an <code>addedAt</code> date (YYYY-MM-DD) for accurate Recently Added sorting; older undated entries appear in reverse original order.</p>
 </main>
 <script>
 'use strict';
@@ -72,7 +72,8 @@ function draw(){
  let q=$('search').value.trim().toLowerCase(),cat=$('category').value,sub=$('subcategory').value,batch=$('batch').value,sort=$('sort').value;
  let found=plugins.filter(p=>(!cat||p.category===cat)&&(!sub||p.subcategory===sub)&&(!batch||String(p.batch)===batch)&&(!q||[p.name,p.developer,p.category,p.subcategory,p.description,...(p.tags||[]),...(p.includes||[])].join(' ').toLowerCase().includes(q)));
  const val=(p,k)=>p[k]==null?Infinity:p[k];
- if(sort==='name')found.sort((a,b)=>a.name.localeCompare(b.name));
+ if(sort==='recent')found.sort((a,b)=>{const dateA=a.addedAt||'',dateB=b.addedAt||'';return dateB.localeCompare(dateA)||plugins.indexOf(b)-plugins.indexOf(a)});
+  if(sort==='name')found.sort((a,b)=>a.name.localeCompare(b.name));
  if(sort==='developer')found.sort((a,b)=>a.developer.localeCompare(b.developer)||a.name.localeCompare(b.name));
  if(sort==='listed-low')found.sort((a,b)=>val(a,'listedPrice')-val(b,'listedPrice'));
  if(sort==='listed-high')found.sort((a,b)=>(b.listedPrice??-1)-(a.listedPrice??-1));
@@ -146,7 +147,7 @@ function updateSubcategories(){
  control.value=available.includes(prior)?prior:'';
 }
 for(const id of filters)$(id).addEventListener(id==='search'?'input':'change',()=>{if(id==='category')updateSubcategories();draw()});
-$('reset').addEventListener('click',()=>{for(const id of filters)$(id).value=id==='sort'?'original':'';updateSubcategories();draw()});
+$('reset').addEventListener('click',()=>{for(const id of filters)$(id).value=id==='sort'?'recent':'';updateSubcategories();draw()});
 load();
 </script>
 </body></html>
