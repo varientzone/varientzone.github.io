@@ -3441,6 +3441,57 @@
       ],
       "classificationStatus": "Based on developer product descriptions; verify individual pages",
       "addedAt": "2026-11-22"
+    },
+    {
+      "id": "p157",
+      "batch": 4,
+      "developer": "Bobinger Audio",
+      "name": "Binaural Droner",
+      "listedPrice": 5,
+      "targetPrice": null,
+      "priority": "Medium",
+      "category": "Virtual Instrument",
+      "purchaseUrl": "https://bobingeraudio.gumroad.com/l/usokd?affiliate_id=899056659",
+      "notes": "Listed as €5+; $5 is a provisional USD planning placeholder, not a verified conversion. Check Reaktor requirements and plugin format before purchasing.",
+      "includes": [],
+      "description": "Experimental binaural drone and ambient soundscape instrument with sine oscillators, sampled textures, field recordings and granular processing.",
+      "subcategory": "Drone / Ambient Synthesizer",
+      "tags": [
+        "Drone",
+        "Ambient",
+        "Binaural",
+        "Granular",
+        "Field Recordings",
+        "Soundscapes"
+      ],
+      "classificationStatus": "Provisional; verify developer specifications and Reaktor compatibility",
+      "addedAt": "2026-11-22"
+    },
+    {
+      "id": "p158",
+      "batch": 4,
+      "developer": "Y R A K I (Mariano Sibilia)",
+      "name": "M4L LayerLab",
+      "listedPrice": null,
+      "targetPrice": null,
+      "priority": "Low",
+      "category": "Virtual Instrument",
+      "purchaseUrl": "https://marianosibilia1992.gumroad.com/l/m4l_layerlab?affiliate_id=899056659",
+      "notes": "£15+ (GBP), not converted into USD tracker totals. Max for Live device requiring compatible Ableton Live/Max for Live; NOT a native FL Studio VST. No preset saving; record generated sounds before removing device.",
+      "includes": [],
+      "description": "Max for Live stochastic one-shot generator that layers folder-loaded samples across four slots, with randomization matrix, speed/stretch controls, reverse, filtering, panning, phase inversion and global ADSR.",
+      "subcategory": "Generative Sample Layering",
+      "tags": [
+        "Max for Live",
+        "Ableton Live",
+        "One-Shots",
+        "Stochastic",
+        "Sample Layering",
+        "Randomization",
+        "Sound Design"
+      ],
+      "classificationStatus": "Verified from developer Gumroad listing",
+      "addedAt": "2026-11-22"
     }
   ],
   "classificationPolicy": "Broad category, one primary functional subcategory, multiple searchable tags. Provisional classifications are not all official-source verified."
