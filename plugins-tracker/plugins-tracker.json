@@ -3163,6 +3163,33 @@
         "Multi-Engine"
       ],
       "classificationStatus": "Provisional"
+    },
+    {
+      "id": "p146",
+      "batch": 4,
+      "developer": "Soundiron",
+      "name": "Shudder",
+      "listedPrice": 19,
+      "targetPrice": null,
+      "priority": "Low",
+      "category": "Sample Library / Instrument",
+      "purchaseUrl": "https://soundiron.com/products/shudder",
+      "notes": "Official store displayed $19 sale price (regular $39) on 2026-11-22; planning figure, not guaranteed future price. Full Kontakt 6.6+ or free Decent Sampler 1.11.18+; unlocked WAV samples also included.",
+      "includes": [],
+      "description": "Dark cinematic sound-design library featuring glitched percussion, horror stingers, risers, drones, pads and unsettling atmospheres.",
+      "subcategory": "Sound Design Library",
+      "tags": [
+        "Sound Design Library",
+        "Horror",
+        "Glitch",
+        "Cinematic",
+        "Percussion",
+        "Drones",
+        "Kontakt",
+        "Decent Sampler",
+        "WAV Samples"
+      ],
+      "classificationStatus": "Verified official product description"
     }
   ],
   "classificationPolicy": "Broad category, one primary functional subcategory, multiple searchable tags. Provisional classifications are not all official-source verified."
