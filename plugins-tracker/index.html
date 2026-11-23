@@ -53,7 +53,7 @@ tr:hover td{background:#1a2030}
 <div class="field"><label for="category">Category</label><select id="category"><option value="">All categories</option></select></div>
 <div class="field"><label for="subcategory">Function / Subcategory</label><select id="subcategory"><option value="">All functions</option></select></div>
 <div class="field"><label for="batch">Original batch</label><select id="batch"><option value="">All batches</option><option value="1">Batch 1</option><option value="2">Batch 2</option><option value="3">Batch 3</option><option value="4">Batch 4</option></select></div>
-<div class="field"><label for="sort">Sort by</label><select id="sort"><option value="recent">Recently added (newest first)</option><option value="original">Original order</option><option value="name">Plugin name A–Z</option><option value="developer">Developer A–Z</option><option value="listed-low">Listed price: low to high</option><option value="listed-high">Listed price: high to low</option><option value="target">Target price first</option><option value="priority-low">Priority: low to high</option><option value="priority-high">Priority: high to low</option></select></div>
+<div class="field"><label for="sort">Sort by</label><select id="sort"><option value="original">Original order</option><option value="name">Plugin name A–Z</option><option value="developer">Developer A–Z</option><option value="listed-low">Listed price: low to high</option><option value="listed-high">Listed price: high to low</option><option value="target">Target price first</option><option value="recent">Recently added</option><option value="priority-low">Priority: low to high</option><option value="priority-high" selected>Priority: high to low</option></select></div>
 </section>
 <div class="actions"><div class="count" id="result-count" aria-live="polite">Loading wishlist…</div><button type="button" id="reset">Reset filters</button></div>
 <div id="error" class="warning" hidden></div>
@@ -147,7 +147,7 @@ function updateSubcategories(){
  control.value=available.includes(prior)?prior:'';
 }
 for(const id of filters)$(id).addEventListener(id==='search'?'input':'change',()=>{if(id==='category')updateSubcategories();draw()});
-$('reset').addEventListener('click',()=>{for(const id of filters)$(id).value=id==='sort'?'recent':'';updateSubcategories();draw()});
+$('reset').addEventListener('click',()=>{for(const id of filters)$(id).value=id==='sort'?'priority-high':'';updateSubcategories();draw()});
 load();
 </script>
 </body></html>
