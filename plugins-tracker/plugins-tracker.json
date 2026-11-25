@@ -3492,6 +3492,58 @@
       ],
       "classificationStatus": "Verified from developer Gumroad listing",
       "addedAt": "2026-11-22"
+    },
+    {
+      "id": "p159",
+      "batch": 4,
+      "developer": "Steinberg",
+      "name": "HALion Sonic 7",
+      "listedPrice": 0,
+      "targetPrice": null,
+      "priority": "High",
+      "category": "Virtual Instrument",
+      "purchaseUrl": "https://www.steinberg.net/vst-instruments/halion/sonic/",
+      "notes": "Free player; no sample content included by default. Free libraries available separately. Required for Chromaspheres unless HALion 7 is installed.",
+      "includes": [],
+      "description": "Player for sample libraries and hybrid instruments with a virtual-analog synth layer and over 70 effects.",
+      "subcategory": "Instrument Player",
+      "tags": [
+        "Instrument Player",
+        "HALion",
+        "Virtual Analog",
+        "Sample Playback",
+        "Free"
+      ],
+      "classificationStatus": "Based on official product page screenshots",
+      "addedAt": "2026-11-25"
+    },
+    {
+      "id": "p160",
+      "batch": 4,
+      "developer": "Steinberg",
+      "name": "Chromaspheres",
+      "listedPrice": 0,
+      "targetPrice": null,
+      "priority": "High",
+      "category": "Virtual Instrument",
+      "purchaseUrl": "https://www.steinberg.net/vst-instruments/chromaspheres/",
+      "notes": "Advertised as a free full version on the official product page shown by the user. Requires HALion Sonic 7 (free) or HALion 7; not an independent VST. Activation not tested.",
+      "includes": [],
+      "description": "Drag-and-drop sample transformation instrument with granular, sample, spectral and wavetable engines, 30 sound-shaping modes and MPE support.",
+      "subcategory": "Hybrid Synthesizer",
+      "tags": [
+        "Hybrid Synthesizer",
+        "HALion",
+        "Granular",
+        "Spectral",
+        "Wavetable",
+        "Sample Playback",
+        "Sound Design",
+        "MPE",
+        "Free"
+      ],
+      "classificationStatus": "Based on official product page screenshots",
+      "addedAt": "2026-11-25"
     }
   ],
   "classificationPolicy": "Broad category, one primary functional subcategory, multiple searchable tags. Provisional classifications are not all official-source verified."
